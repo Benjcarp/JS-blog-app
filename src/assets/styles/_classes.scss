@@ -1,0 +1,56 @@
+.container {
+    min-height: 100vh;
+    display: grid;
+    grid:
+        "header" auto "content" 1fr "footer" auto / auto;
+}
+
+header {
+    grid-area: header;
+    box-shadow: $box-shadow;
+    padding: 20px;
+    background-color: $primary-color-dark;
+
+    @include flex($justify: space-between);
+
+    a {
+        color: white;
+    }
+
+    .header-brand {
+        font-size: 4rem;
+        font-weight: 700;
+    }
+
+    ul {
+
+        @include flex;
+
+        li {
+            .header-nav {
+                font-size: 1.8rem;
+                padding: 10px 15px;
+            }
+
+            .active {
+                font-weight: 700;
+                border: 1px solid $accent-color;
+                border-radius: 25px;
+            }
+        }
+    }
+}
+
+.content {
+    grid-area: content;
+    box-shadow: $box-shadow;
+    padding: 20px;
+}
+
+footer {
+    grid-area: footer;
+    background: $text-color;
+    padding: 20px;
+    color: white;
+    @include flex;
+}
