@@ -20,8 +20,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "", "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".content {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n}\n.content .articles-container {\n  max-width: 800px;\n  width: 100%;\n  margin: 5rem 0 10rem;\n}\n.content .articles-container .article {\n  background: white;\n  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);\n  border-radius: 1rem;\n  padding: 0 5rem;\n  margin-top: 8rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.content .articles-container .article img {\n  height: 8rem;\n  width: 8rem;\n  border-radius: 50%;\n  margin-top: -4rem;\n  border: 4px solid #2ecc71;\n}\n.content .articles-container .article h2 {\n  margin-top: 2rem;\n  margin-bottom: 0;\n}\n.content .articles-container .article-author {\n  color: #2ecc71;\n  font-weight: 700;\n  margin-bottom: 3rem;\n}\n.content .articles-container .article-content {\n  max-width: 550px;\n  white-space: pre-line;\n}\n.content .articles-container .article-actions {\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-end;\n  align-items: center;\n  margin: 3rem 0;\n  padding-top: 3rem;\n  border-top: 1px solid #ecf0f1;\n}\n.content .articles-container .article-actions .btn {\n  margin-left: 1rem;\n}", "",{"version":3,"sources":["webpack://./src/index.scss","webpack://./src/assets/styles/_mixins.scss","webpack://./src/assets/styles/_variables.scss"],"names":[],"mappings":"AAGA;ECsBI,aAAA;EACA,mBAFoB;EAGpB,uBAHmC;EAInC,mBAJmD;ADlBvD;AAAE;EACE,gBAAA;EACA,WAAA;EACA,oBAAA;AAEJ;AAAI;EACE,iBAAA;EACA,mFEJO;EFKP,mBAAA;EACA,eAAA;EACA,gBAAA;ECSF,aAAA;EACA,sBDRgB;ECShB,uBAHmC;EAInC,mBAJmD;ADFvD;AAFM;EACE,YAAA;EACA,WAAA;EACA,kBAAA;EACA,iBAAA;EACA,yBAAA;AAIR;AADM;EACE,gBAAA;EACA,gBAAA;AAGR;AAAM;EACE,cEhCQ;EFiCR,gBAAA;EACA,mBAAA;AAER;AACM;EACE,gBAAA;EACA,qBAAA;AACR;AAEM;EACE,WAAA;ECpBJ,aAAA;EACA,mBAFoB;EAGpB,yBDmB4B;EClB5B,mBAJmD;EDuB/C,cAAA;EACA,iBAAA;EACA,6BAAA;AAGR;AADQ;EACE,iBAAA;AAGV","sourcesContent":["@import \"./assets/styles/variables\";\r\n@import \"./assets/styles/mixins\";\r\n\r\n.content {\r\n  @include flex;\r\n\r\n  .articles-container {\r\n    max-width: 800px;\r\n    width: 100%;\r\n    margin: 5rem 0 10rem;\r\n\r\n    .article {\r\n      background: white;\r\n      box-shadow: $box-shadow;\r\n      border-radius: 1rem;\r\n      padding: 0 5rem;\r\n      margin-top: 8rem;\r\n\r\n      @include flex(column);\r\n\r\n      img {\r\n        height: 8rem;\r\n        width: 8rem;\r\n        border-radius: 50%;\r\n        margin-top: -4rem;\r\n        border: 4px solid $primary-color;\r\n      }\r\n\r\n      h2 {\r\n        margin-top: 2rem;\r\n        margin-bottom: 0;\r\n      }\r\n\r\n      &-author {\r\n        color: $primary-color;\r\n        font-weight: 700;\r\n        margin-bottom: 3rem;\r\n      }\r\n\r\n      &-content {\r\n        max-width: 550px;\r\n        white-space: pre-line;\r\n      }\r\n\r\n      &-actions {\r\n        width: 100%;\r\n        @include flex($justify: flex-end);\r\n        margin: 3rem 0;\r\n        padding-top: 3rem;\r\n        border-top: 1px solid $divider-color;\r\n\r\n        .btn {\r\n          margin-left: 1rem;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n","@mixin xs {\r\n    @media (max-width: $screen-xs) {\r\n        @content;\r\n    }\r\n}\r\n\r\n@mixin sm {\r\n    @media (max-width: $screen-sm) {\r\n        @content;\r\n    }\r\n}\r\n\r\n@mixin md {\r\n    @media (min-width: $screen-sm) and (max-width: $screen-md) {\r\n        @content;\r\n    }\r\n}\r\n\r\n@mixin xl {\r\n    @media (min-width: $screen-xl) {\r\n        @content;\r\n    }\r\n}\r\n\r\n@mixin flex($direction: row, $justify: center, $align: center) {\r\n    display: flex;\r\n    flex-direction: $direction;\r\n    justify-content: $justify;\r\n    align-items: $align;\r\n}","@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');\r\n\r\n$primary-color: #2ecc71;\r\n$primary-color-dark: #27ae60;\r\n$accent-color: #2c3e50;\r\n$text-color: #333;\r\n$text-error: #e74c3c;\r\n$divider-color: #ecf0f1;\r\n$font-family: 'Mulish', sans-serif;\r\n$box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);\r\n$screen-xs: 480px;\r\n$screen-sm: 768px;\r\n$screen-md: 979px;\r\n$screen-xl: 1200px;"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -589,6 +590,41 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
 
+const articleContainer = document.querySelector(".articles-container");
+const displayArticles = articles => {
+  const articlesDOM = articles.map(article => {
+    const articleNode = document.createElement("div");
+    articleNode.classList.add("article");
+    articleNode.innerHTML = `
+        <img
+        src=${article.image ? article.image : "assets/image/default_profile.png"}
+        alt=""
+        />
+        <h2>${article.title}</h2>
+        <p class="article-author">${article.author}</p>
+        <p class="article-content">${article.content}</p>
+        <div class="article-actions">
+        <button class="btn btn-danger" data.id=${article._id}>Supprimer</button>
+        </div>`;
+    return articleNode;
+  });
+  articleContainer.innerHTML = "";
+  articleContainer.append(...articlesDOM);
+};
+const fetchArticles = async () => {
+  try {
+    const response = await fetch("https://restapi.fr/api/dwwm_benjamin");
+    const articles = await response.json();
+    if (!articles.length) {
+      displayArticles([articles]);
+    } else {
+      displayArticles(articles);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+fetchArticles();
 })();
 
 /******/ })()
