@@ -591,6 +591,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
 
 const articleContainer = document.querySelector(".articles-container");
+const categoriesContainer = document.querySelector(".categories");
 const displayArticles = articles => {
   const articlesDOM = articles.map(article => {
     const articleNode = document.createElement("div");
@@ -646,6 +647,15 @@ const displayArticles = articles => {
     });
   });
 };
+const displayMenuCategories = categoriesArray => {
+  const liElements = categoriesArray.map(categoryElement => {
+    const li = document.createElement("li");
+    li.innerHTML = `${categoryElement[0]} ( <strong>${categoryElement[1]}</strong> )`;
+    return li;
+  });
+  categoriesContainer.innerHTML = "";
+  categoriesContainer.append(...liElements);
+};
 const createMenuCategories = articles => {
   const categories = articles.reduce((acc, article) => {
     if (acc[article.category]) {
@@ -655,6 +665,9 @@ const createMenuCategories = articles => {
     }
     return acc;
   }, {});
+  const categoriesArray = Object.keys(categories).map(category => [category, categories[category]]);
+  console.log(categoriesArray);
+  displayMenuCategories(categoriesArray);
 };
 const fetchArticles = async () => {
   // fonction asynchrone qui recupere les donnees depuis l'API

@@ -1,6 +1,7 @@
 import "./index.scss";
 
 const articleContainer = document.querySelector(".articles-container");
+const categoriesContainer = document.querySelector(".categories");
 
 const displayArticles = (articles) => {
   const articlesDOM = articles.map((article) => {
@@ -68,6 +69,17 @@ const displayArticles = (articles) => {
   });
 };
 
+const displayMenuCategories = (categoriesArray) => {
+  const liElements = categoriesArray.map((categoryElement) => {
+    const li = document.createElement("li");
+    li.innerHTML = `${categoryElement[0]} ( <strong>${categoryElement[1]}</strong> )`;
+    return li;
+  });
+
+  categoriesContainer.innerHTML = "";
+  categoriesContainer.append(...liElements);
+};
+
 const createMenuCategories = (articles) => {
   const categories = articles.reduce((acc, article) => {
     if (acc[article.category]) {
@@ -78,6 +90,13 @@ const createMenuCategories = (articles) => {
 
     return acc;
   }, {});
+  const categoriesArray = Object.keys(categories).map((category) => [
+    category,
+    categories[category],
+  ]);
+  console.log(categoriesArray);
+
+  displayMenuCategories(categoriesArray);
 };
 
 const fetchArticles = async () => {
