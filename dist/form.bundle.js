@@ -593,7 +593,34 @@ __webpack_require__.r(__webpack_exports__);
 const form = document.querySelector("form");
 const errorList = document.querySelector("#errors");
 const cancelBtn = document.querySelector(".btn-secondary");
-cancelBtn.addEventListener("click", () => {
+let articleId;
+const initForm = async () => {
+  const param = new URL(location.href);
+  articleId = param.searchParams.get("id");
+  const submitBtn = document.querySelector(".btn-primary");
+  if (articleId) {
+    const response = await fetch(`https://restapi.fr/api/dwwm_benjamin/${articleId}`);
+    if (response.status < 299) {
+      const article = await response.json();
+      submitBtn.innerText = "Sauvegarder";
+      fillForm(article);
+    }
+  }
+};
+const fillForm = article => {
+  const author = document.querySelector('input[name="author"]');
+  const image = document.querySelector('input[name="image"]');
+  const category = document.querySelector('input[name="category"]');
+  const title = document.querySelector('input[name="title"]');
+  const content = document.querySelector("textarea");
+  author.value = article.author;
+  image.value = article.image;
+  category.value = article.category;
+  title.value = article.title;
+  content.value = article.content;
+};
+initForm();
+cancelBtn.addEventListener("click", async () => {
   location.assign("./index.html");
 });
 const formIsValide = data => {
@@ -622,13 +649,24 @@ form.addEventListener("submit", async event => {
   if (formIsValide(data)) {
     try {
       const json = JSON.stringify(data);
-      const response = await fetch("https://restapi.fr/api/dwwm_benjamin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: json
-      });
+      let response;
+      if (articleId) {
+        response = await fetch("https://restapi.fr/api/dwwm_benjamin", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: json
+        });
+      } else {
+        response = await fetch("https://restapi.fr/api/dwwm_benjamin", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: json
+        });
+      }
       if (response.status < 299) {
         location.assign("./index.html");
       }

@@ -2,12 +2,38 @@
 @import "./assets/styles/mixins";
 
 .content {
-  @include flex;
+  @include flex($align: flex-start);
+
+  .sidebar {
+    flex: 0 0 250px;
+    margin: 100px 30px;
+    border: solid 1px $text-color;
+    border-radius: 5px;
+    padding: 30px;
+    background: white;
+
+    .categories {
+      li {
+        margin-bottom: 15px;
+
+        &:hover {
+          color: $primary-color;
+          transition: color 0.2s;
+          cursor: pointer;
+
+          strong {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
 
   .articles-container {
     max-width: 800px;
     width: 100%;
     margin: 5rem 0 10rem;
+    flex: 1;
 
     .article {
       background: white;

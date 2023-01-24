@@ -24,6 +24,7 @@ const displayArticles = (articles) => {
         </span></p>
         <p class="article-content">${article.content}</p>
         <div class="article-actions">
+        <button class="btn btn-primary" data-id=${article._id}>Modifier</button>
         <button class="btn btn-danger" data-id=${article._id}>Supprimer</button>
         </div>`;
 
@@ -34,6 +35,7 @@ const displayArticles = (articles) => {
   articleContainer.append(...articlesDOM);
 
   const deleteBtn = articleContainer.querySelectorAll(".btn-danger");
+  const editBtns = articleContainer.querySelectorAll(".btn-primary");
 
   deleteBtn.forEach((button) => {
     button.addEventListener("click", async (event) => {
@@ -54,21 +56,46 @@ const displayArticles = (articles) => {
       }
     });
   });
+
+  editBtns.forEach((button) => {
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const target = event.target;
+
+      const articleId = target.dataset.id;
+      location.assign(`./form.html?id=${articleId}`);
+    });
+  });
+};
+
+const createMenuCategories = (articles) => {
+  const categories = articles.reduce((acc, article) => {
+    if (acc[article.category]) {
+      acc[article.category]++;
+    } else {
+      acc[article.category] = 1;
+    }
+
+    return acc;
+  }, {});
 };
 
 const fetchArticles = async () => {
+  // fonction asynchrone qui recupere les donnees depuis l'API
   try {
     const response = await fetch("https://restapi.fr/api/dwwm_benjamin");
-    const articles = await response.json();
+    let articles = await response.json(); // <=== on change 'const' en 'let'
 
-    if (articles) {
-      if (!articles.length !== 0) {
-        displayArticles([articles]);
-      } else {
-        displayArticles(articles);
-      }
+    if (!(articles instanceof Array)) {
+      // si 'articles' n'est pas un tableau
+      articles = [articles]; // on le transforme en tableau
+    }
+
+    if (articles.length) {
+      displayArticles(articles);
+      createMenuCategories(articles);
     } else {
-      articleContainer.innerHTML = "<p>Pas d'articles...<p>";
+      articleContainer.innerHTML = "<p>Pas d'articles pour le moment</p>";
     }
   } catch (error) {
     console.log(error);
