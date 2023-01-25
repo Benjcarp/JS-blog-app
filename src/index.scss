@@ -26,6 +26,11 @@
           }
         }
       }
+
+      .active {
+        color: $primary-color;
+        font-weight: bold;
+      }
     }
   }
 
