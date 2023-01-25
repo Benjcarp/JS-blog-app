@@ -25,7 +25,7 @@ const initForm = async () => {
 const fillForm = (article) => {
   const author = document.querySelector('input[name="author"]');
   const image = document.querySelector('input[name="image"]');
-  const category = document.querySelector('input[name="category"]');
+  const category = document.querySelector('select[name="category"]');
   const title = document.querySelector('input[name="title"]');
   const content = document.querySelector("textarea");
 
@@ -76,11 +76,14 @@ form.addEventListener("submit", async (event) => {
       let response;
 
       if (articleId) {
-        response = await fetch("https://restapi.fr/api/dwwm_benjamin", {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: json,
-        });
+        response = await fetch(
+          `https://restapi.fr/api/dwwm_benjamin/${articleId}`,
+          {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: json,
+          }
+        );
       } else {
         response = await fetch("https://restapi.fr/api/dwwm_benjamin", {
           method: "POST",
