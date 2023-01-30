@@ -1,4 +1,5 @@
 import "./index.scss";
+import { openModal } from "./assets/javascript/modal";
 
 const articleContainer = document.querySelector(".articles-container");
 const categoriesContainer = document.querySelector(".categories");
@@ -58,19 +59,25 @@ const displayArticles = () => {
   deleteBtn.forEach((button) => {
     button.addEventListener("click", async (event) => {
       event.preventDefault();
-      try {
-        const target = event.target;
-        const articleId = target.dataset.id;
+      window.scrollTo(0, 0);
+      const answer = await openModal(
+        "etes vous sur de vouloir supprimer votre article ?"
+      );
+      if (answer) {
+        try {
+          const target = event.target;
+          const articleId = target.dataset.id;
 
-        const response = await fetch(
-          `https://restapi.fr/api/dwwm_benjamin/${articleId}`,
-          { method: "DELETE" }
-        );
-        const body = await response.json();
-        fetchArticles();
-        console.log(body);
-      } catch (error) {
-        console.log(error);
+          const response = await fetch(
+            `https://restapi.fr/api/dwwm_benjamin/${articleId}`,
+            { method: "DELETE" }
+          );
+          const body = await response.json();
+          fetchArticles();
+          console.log(body);
+        } catch (error) {
+          console.log(error);
+        }
       }
     });
   });

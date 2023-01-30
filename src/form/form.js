@@ -1,4 +1,5 @@
 import "./form.scss";
+import { openModal } from "../assets/javascript/modal";
 
 const form = document.querySelector("form");
 const errorList = document.querySelector("#errors");
@@ -39,7 +40,12 @@ const fillForm = (article) => {
 initForm();
 
 cancelBtn.addEventListener("click", async () => {
-  location.assign("./index.html");
+  const answer = await openModal(
+    "attention, en annulant vous perdrez votre article, confirmez vous votre annulation"
+  );
+  if (answer) {
+    location.assign("./index.html");
+  }
 });
 
 const formIsValide = (data) => {
